@@ -107,3 +107,18 @@ modal.style.display = "none";
 
 }
 
+function closeModal() {
+    document.getElementById("serviceModal").style.display = "none";
+} 
+
+function closeModal(){
+    document.getElementById("serviceModal").style.display = "none";
+}
+
+window.onclick = function(event){
+    const modal = document.getElementById("serviceModal");
+
+    if(event.target === modal){
+        modal.style.display = "none";
+    }
+}
