@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ewerton Siqueira Fotografia</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="bg-glow"></div>
+
+<header class="hero">
+
+<div class="hero-container">
+
+<div class="hero-image">
+
+<img src="ewerton.jpg" alt="Ewerton Siqueira">
+
+</div>
+
+<div class="hero-text">
+
+<span class="hero-tag">
+Fotógrafo Profissional
+</span>
+
+<h1>
+Transformando momentos em memórias inesquecíveis.
+</h1>
+
+<p>
+Fotografia com sensibilidade, criatividade e atenção aos detalhes para registrar aquilo que realmente importa.
+</p>
+
+<div class="hero-buttons">
+
+<a href="https://instagram.com/siqueiraew"
+target="_blank"
+class="btn">
+Ver Instagram
+</a>
+
+<a href="https://wa.me/5511956825083"
+target="_blank"
+class="btn btn-blue">
+Solicitar Orçamento
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="impact reveal">
+
+<h2>O tempo passa. As lembranças permanecem.</h2>
+
+<p>
+Uma fotografia é muito mais do que uma imagem.
+É a oportunidade de reviver emoções,
+histórias e momentos especiais por toda a vida.
+</p>
+
+</section>
+
+<section class="services reveal">
+
+<h2>Serviços</h2>
+
+<div class="services-grid">
+
+<div class="service-card"
+onclick="showService('individual')">
+
+<i class="fa-solid fa-camera"></i>
+
+<h3>Ensaio Individual</h3>
+
+<p>Clique para ver detalhes</p>
+
+</div>
+
+<div class="service-card"
+onclick="showService('casal')">
+
+<i class="fa-solid fa-heart"></i>
+
+<h3>Ensaio de Casal</h3>
+
+<p>Clique para ver detalhes</p>
+
+</div>
+
+<div class="service-card"
+onclick="showService('eventos')">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+<h3>Eventos</h3>
+
+<p>Clique para ver detalhes</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="pricing reveal">
+
+<h2>Investimento</h2>
+
+<div class="pricing-grid">
+
+<div class="price-card">
+
+<span class="badge">
+Promoção de Lançamento
+</span>
+
+<h3>Ensaio Individual</h3>
+
+<h4>R$100</h4>
+
+</div>
+
+<div class="price-card">
+
+<h3>Ensaio de Casal</h3>
+
+<h4>R$200</h4>
+
+</div>
+
+<div class="price-card">
+
+<h3>Eventos</h3>
+
+<h4>A partir de R$300</h4>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="features reveal">
+
+<h2>Diferenciais</h2>
+
+<div class="features-grid">
+
+<div class="feature">
+<i class="fa-solid fa-user-check"></i>
+<p>Atendimento Personalizado</p>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-camera-retro"></i>
+<p>Direcionamento Durante as Fotos</p>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+<p>Tratamento Profissional</p>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-folder-open"></i>
+<p>Entrega Organizada</p>
+</div>
+
+<div class="feature">
+<i class="fa-solid fa-award"></i>
+<p>Compromisso com Qualidade</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="portfolio reveal">
+
+<h2>Portfólio</h2>
+
+<p>
+Portfólio em construção.
+Novos trabalhos serão adicionados em breve.
+</p>
+
+<div class="portfolio-grid">
+
+<div class="portfolio-item">Em Breve</div>
+
+<div class="portfolio-item">Em Breve</div>
+
+<div class="portfolio-item">Em Breve</div>
+
+</div>
+
+</section>
+
+<section class="cta reveal">
+
+<h2>Sua história merece ser registrada.</h2>
+
+<p>
+Não deixe momentos importantes passarem sem uma lembrança para guardar.
+</p>
+
+<div class="hero-buttons">
+
+<a href="https://instagram.com/siqueiraew"
+target="_blank"
+class="btn">
+Instagram
+</a>
+
+<a href="https://wa.me/5511956825083"
+target="_blank"
+class="btn btn-blue">
+WhatsApp
+</a>
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>Ewerton Siqueira Fotografia</h3>
+
+<p>@siqueiraew</p>
+
+<p>(11) 95682-5083</p>
+
+</footer>
+
+<div id="serviceModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close"
+onclick="closeModal()">
+
+&times;
+
+</span>
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalText"></p>
+
+<a href="https://wa.me/5511956825083"
+target="_blank"
+class="btn btn-blue">
+
+Solicitar Orçamento
+
+</a>
+
+</div>
+
+</div>
+
+<a href="https://wa.me/5511956825083"
+target="_blank"
+class="whatsapp">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+<script src="script.js"></script>
+
+</body>
+</html>
