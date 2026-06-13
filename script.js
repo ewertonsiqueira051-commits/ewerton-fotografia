@@ -88,7 +88,7 @@ mensagemWhatsapp =
 const botaoWhatsapp = document.querySelector("#serviceModal .btn");
 
 botaoWhatsapp.href =
-"https://wa.me/5511956825083?text=" +
+"https://wa.me/5544991080433?text=" +
 encodeURIComponent(mensagemWhatsapp);
 
 modal.style.display = "flex";
