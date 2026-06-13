@@ -13,14 +13,7 @@ overflow-x:hidden;
 }
 
 .bg-glow{
-position:fixed;
-width:800px;
-height:800px;
-background:#005eff25;
-filter:blur(180px);
-top:-200px;
-right:-200px;
-z-index:-1;
+display:none;
 }
 
 section{
