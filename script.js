@@ -1,124 +1,161 @@
+// ===============================
+// ANIMAÇÃO AO ROLAR A PÁGINA
+// ===============================
+
 const reveals = document.querySelectorAll(".reveal");
 
-window.addEventListener("scroll", () => {
+function revealSections(){
 
-reveals.forEach((element) => {
+    reveals.forEach(section => {
 
-const top = element.getBoundingClientRect().top;
+        const top = section.getBoundingClientRect().top;
+        const visible = window.innerHeight - 120;
 
-if(top < window.innerHeight - 100){
-element.classList.add("active");
+        if(top < visible){
+            section.classList.add("active");
+        }
+
+    });
+
 }
 
-});
+window.addEventListener("scroll", revealSections);
+window.addEventListener("load", revealSections);
+
+
+// ===============================
+// EFEITO PARALLAX NA FOTO
+// ===============================
+
+const heroImage = document.querySelector(".hero-image img");
+
+window.addEventListener("mousemove",(e)=>{
+
+    if(!heroImage) return;
+
+    const x = (window.innerWidth/2 - e.clientX)/45;
+    const y = (window.innerHeight/2 - e.clientY)/45;
+
+    heroImage.style.transform =
+    `translate(${x}px, ${y}px)`;
 
 });
 
-window.dispatchEvent(new Event("scroll"));
+// ===============================
+// MODAL DOS SERVIÇOS
+// ===============================
 
 function showService(service){
 
-const modal = document.getElementById("serviceModal");
-const title = document.getElementById("modalTitle");
-const text = document.getElementById("modalText");
+    const modal = document.getElementById("serviceModal");
+    const title = document.getElementById("modalTitle");
+    const text = document.getElementById("modalText");
 
-let mensagemWhatsapp = "";
+    const button = document.querySelector("#serviceModal .btn");
 
-if(service === "individual"){
+    let mensagem = "";
 
-title.innerHTML = "Ensaio Individual";
+    switch(service){
 
-text.innerHTML = `
-Sessão fotográfica personalizada para destacar sua personalidade.
+        case "fotografia":
 
-<br><br>
+            title.innerHTML = "Fotografia Profissional";
 
-✔ Direcionamento durante as fotos<br>
-✔ Edição profissional<br>
-✔ Entrega digital organizada<br>
-✔ Valor promocional: R$100
-`;
+            text.innerHTML = `
+            Ensaios, eventos, empresas, produtos e retratos.
 
-mensagemWhatsapp =
-"Olá! Estava no seu site e gostaria de fazer um orçamento sobre Ensaio Individual.";
+            <br><br>
 
-}
+            ✔ Direcionamento durante as fotos<br>
+            ✔ Tratamento profissional<br>
+            ✔ Entrega digital organizada<br>
+            ✔ Atendimento personalizado
+            `;
 
-if(service === "casal"){
+            mensagem = "Olá! Vi seu site e gostaria de solicitar um orçamento para Fotografia.";
 
-title.innerHTML = "Ensaio de Casal";
+        break;
 
-text.innerHTML = `
-Registre momentos especiais ao lado de quem você ama.
 
-<br><br>
+        case "video":
 
-✔ Fotos espontâneas e naturais<br>
-✔ Direcionamento completo<br>
-✔ Tratamento profissional<br>
-✔ Valor promocional: R$200
-`;
+            title.innerHTML = "Produção de Vídeos";
 
-mensagemWhatsapp =
-"Olá! Estava no seu site e gostaria de fazer um orçamento sobre Ensaio de Casal.";
+            text.innerHTML = `
+            Produção de vídeos para empresas e redes sociais.
 
-}
+            <br><br>
 
-if(service === "eventos"){
+            ✔ Reels<br>
+            ✔ Bastidores<br>
+            ✔ Vídeos promocionais<br>
+            ✔ Conteúdo profissional
+            `;
 
-title.innerHTML = "Eventos";
+            mensagem = "Olá! Vi seu site e gostaria de solicitar um orçamento para Produção de Vídeos.";
 
-text.innerHTML = `
-Cobertura fotográfica para aniversários,
-igrejas e eventos especiais.
+        break;
 
-<br><br>
 
-✔ Cobertura profissional<br>
-✔ Entrega organizada<br>
-✔ Fotos editadas<br>
-✔ A partir de R$300
-`;
+        case "social":
 
-mensagemWhatsapp =
-"Olá! Estava no seu site e gostaria de fazer um orçamento sobre Eventos.";
+            title.innerHTML = "Gestão de Redes Sociais";
 
-}
+            text.innerHTML = `
+            Planejamento e criação de conteúdo para fortalecer sua presença digital.
 
-const botaoWhatsapp = document.querySelector("#serviceModal .btn");
+            <br><br>
 
-botaoWhatsapp.href =
-"https://wa.me/5544991080433?text=" +
-encodeURIComponent(mensagemWhatsapp);
+            ✔ Planejamento estratégico<br>
+            ✔ Conteúdo para Instagram<br>
+            ✔ Reels e Carrosséis<br>
+            ✔ Acompanhamento do perfil
+            `;
 
-modal.style.display = "flex";
+            mensagem = "Olá! Vi seu site e gostaria de solicitar um orçamento para Gestão de Redes Sociais.";
 
-}
+        break;
 
-window.onclick = function(event){
+    }
 
-const modal = document.getElementById("serviceModal");
+    button.href =
+    "https://wa.me/5544991080433?text=" +
+    encodeURIComponent(mensagem);
 
-if(event.target === modal){
-
-modal.style.display = "none";
+    modal.style.display = "flex";
 
 }
 
-}
 
-function closeModal() {
-    document.getElementById("serviceModal").style.display = "none";
-} 
+// ===============================
+// FECHAR MODAL
+// ===============================
 
 function closeModal(){
+
     document.getElementById("serviceModal").style.display = "none";
+
 }
 
-window.onclick = function(event){
+window.addEventListener("click",(e)=>{
+
     const modal = document.getElementById("serviceModal");
 
-    if(event.target === modal){
+    if(e.target === modal){
+
         modal.style.display = "none";
+
     }
-}
+
+});
+
+
+// ===============================
+// ANIMAÇÃO SUAVE AO CARREGAR
+// ===============================
+
+window.addEventListener("load",()=>{
+
+    document.body.style.opacity = "1";
+
+});
