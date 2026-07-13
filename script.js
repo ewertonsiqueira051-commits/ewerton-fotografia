@@ -1,161 +1,158 @@
-// ===============================
-// ANIMAÇÃO AO ROLAR A PÁGINA
-// ===============================
-
 const reveals = document.querySelectorAll(".reveal");
+const heroImage = document.getElementById("heroImage");
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
 
-function revealSections(){
+const serviceModal = document.getElementById("serviceModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const modalButton = document.getElementById("modalButton");
+const closeModalButton = document.querySelector(".close");
 
-    reveals.forEach(section => {
+const imageModal = document.getElementById("imageModal");
+const modalImage = document.getElementById("modalImage");
+const imageCloseButton = document.querySelector(".image-close");
 
-        const top = section.getBoundingClientRect().top;
-        const visible = window.innerHeight - 120;
+const services = {
+  fotografia: {
+    title: "Fotografia",
+    text: `Ensaios, eventos, produtos, empresas e retratos criados para transmitir profissionalismo.<br><br>
+      ✔ Direcionamento durante as fotos<br>
+      ✔ Tratamento profissional<br>
+      ✔ Entrega digital organizada<br>
+      ✔ Atendimento personalizado`,
+    message: "Olá! Vi seu site e gostaria de solicitar um orçamento para Fotografia."
+  },
 
-        if(top < visible){
-            section.classList.add("active");
-        }
+  video: {
+    title: "Produção de vídeos",
+    text: `Vídeos pensados para apresentar a sua marca, prender a atenção e gerar conexão.<br><br>
+      ✔ Reels e vídeos para redes sociais<br>
+      ✔ Bastidores e eventos<br>
+      ✔ Vídeos institucionais<br>
+      ✔ Conteúdo promocional`,
+    message: "Olá! Vi seu site e gostaria de solicitar um orçamento para Produção de Vídeos."
+  },
 
-    });
+  social: {
+    title: "Social media",
+    text: `Planejamento e criação de conteúdo para tornar a sua presença digital mais estratégica.<br><br>
+      ✔ Planejamento de conteúdo<br>
+      ✔ Posts, reels e carrosséis<br>
+      ✔ Identidade visual para redes<br>
+      ✔ Acompanhamento do perfil`,
+    message: "Olá! Vi seu site e gostaria de solicitar um orçamento para Social Media."
+  }
+};
 
+function revealSections() {
+  const visibleArea = window.innerHeight - 100;
+
+  reveals.forEach((section) => {
+    if (section.getBoundingClientRect().top < visibleArea) {
+      section.classList.add("active");
+    }
+  });
 }
+
+function openService(service) {
+  const selectedService = services[service];
+
+  if (!selectedService) return;
+
+  modalTitle.textContent = selectedService.title;
+  modalText.innerHTML = selectedService.text;
+  modalButton.href = `https://wa.me/5544991080433?text=${encodeURIComponent(selectedService.message)}`;
+
+  serviceModal.classList.add("open");
+  serviceModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+}
+
+function closeServiceModal() {
+  serviceModal.classList.remove("open");
+  serviceModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("no-scroll");
+}
+
+function openImage(imagePath, altText) {
+  modalImage.src = imagePath;
+  modalImage.alt = altText;
+  imageModal.classList.add("open");
+  imageModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+}
+
+function closeImageModal() {
+  imageModal.classList.remove("open");
+  imageModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("no-scroll");
+}
+
+document.querySelectorAll(".service-card").forEach((card) => {
+  card.addEventListener("click", () => openService(card.dataset.service));
+
+  card.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openService(card.dataset.service);
+    }
+  });
+});
+
+document.querySelectorAll(".portfolio-item").forEach((item) => {
+  item.addEventListener("click", () => {
+    openImage(item.dataset.image, item.querySelector("img").alt);
+  });
+});
+
+closeModalButton.addEventListener("click", closeServiceModal);
+imageCloseButton.addEventListener("click", closeImageModal);
+
+serviceModal.addEventListener("click", (event) => {
+  if (event.target === serviceModal) closeServiceModal();
+});
+
+imageModal.addEventListener("click", (event) => {
+  if (event.target === imageModal) closeImageModal();
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeServiceModal();
+    closeImageModal();
+  }
+});
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("is-open");
+
+  menuToggle.setAttribute("aria-expanded", isOpen);
+  menuToggle.innerHTML = isOpen
+    ? '<i class="fa-solid fa-xmark"></i>'
+    : '<i class="fa-solid fa-bars"></i>';
+});
+
+document.querySelectorAll(".nav-links a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("is-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+  });
+});
+
+window.addEventListener("mousemove", (event) => {
+  if (!heroImage || window.innerWidth < 900) return;
+
+  const x = (window.innerWidth / 2 - event.clientX) / 55;
+  const y = (window.innerHeight / 2 - event.clientY) / 55;
+
+  heroImage.style.setProperty("--pointer-x", `${x}px`);
+  heroImage.style.setProperty("--pointer-y", `${y}px`);
+});
 
 window.addEventListener("scroll", revealSections);
-window.addEventListener("load", revealSections);
-
-
-// ===============================
-// EFEITO PARALLAX NA FOTO
-// ===============================
-
-const heroImage = document.querySelector(".hero-image img");
-
-window.addEventListener("mousemove",(e)=>{
-
-    if(!heroImage) return;
-
-    const x = (window.innerWidth/2 - e.clientX)/45;
-    const y = (window.innerHeight/2 - e.clientY)/45;
-
-    heroImage.style.transform =
-    `translate(${x}px, ${y}px)`;
-
-});
-
-// ===============================
-// MODAL DOS SERVIÇOS
-// ===============================
-
-function showService(service){
-
-    const modal = document.getElementById("serviceModal");
-    const title = document.getElementById("modalTitle");
-    const text = document.getElementById("modalText");
-
-    const button = document.querySelector("#serviceModal .btn");
-
-    let mensagem = "";
-
-    switch(service){
-
-        case "fotografia":
-
-            title.innerHTML = "Fotografia Profissional";
-
-            text.innerHTML = `
-            Ensaios, eventos, empresas, produtos e retratos.
-
-            <br><br>
-
-            ✔ Direcionamento durante as fotos<br>
-            ✔ Tratamento profissional<br>
-            ✔ Entrega digital organizada<br>
-            ✔ Atendimento personalizado
-            `;
-
-            mensagem = "Olá! Vi seu site e gostaria de solicitar um orçamento para Fotografia.";
-
-        break;
-
-
-        case "video":
-
-            title.innerHTML = "Produção de Vídeos";
-
-            text.innerHTML = `
-            Produção de vídeos para empresas e redes sociais.
-
-            <br><br>
-
-            ✔ Reels<br>
-            ✔ Bastidores<br>
-            ✔ Vídeos promocionais<br>
-            ✔ Conteúdo profissional
-            `;
-
-            mensagem = "Olá! Vi seu site e gostaria de solicitar um orçamento para Produção de Vídeos.";
-
-        break;
-
-
-        case "social":
-
-            title.innerHTML = "Gestão de Redes Sociais";
-
-            text.innerHTML = `
-            Planejamento e criação de conteúdo para fortalecer sua presença digital.
-
-            <br><br>
-
-            ✔ Planejamento estratégico<br>
-            ✔ Conteúdo para Instagram<br>
-            ✔ Reels e Carrosséis<br>
-            ✔ Acompanhamento do perfil
-            `;
-
-            mensagem = "Olá! Vi seu site e gostaria de solicitar um orçamento para Gestão de Redes Sociais.";
-
-        break;
-
-    }
-
-    button.href =
-    "https://wa.me/5544991080433?text=" +
-    encodeURIComponent(mensagem);
-
-    modal.style.display = "flex";
-
-}
-
-
-// ===============================
-// FECHAR MODAL
-// ===============================
-
-function closeModal(){
-
-    document.getElementById("serviceModal").style.display = "none";
-
-}
-
-window.addEventListener("click",(e)=>{
-
-    const modal = document.getElementById("serviceModal");
-
-    if(e.target === modal){
-
-        modal.style.display = "none";
-
-    }
-
-});
-
-
-// ===============================
-// ANIMAÇÃO SUAVE AO CARREGAR
-// ===============================
-
-window.addEventListener("load",()=>{
-
-    document.body.style.opacity = "1";
-
+window.addEventListener("load", () => {
+  document.body.classList.add("ready");
+  revealSections();
 });
