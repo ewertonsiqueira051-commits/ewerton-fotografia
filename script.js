@@ -78,9 +78,9 @@ const galleries = {
     title: "Animais",
     images: [
       "animais-1.jpg",
-      "animais-2.JPG",
-      "animais-3.jpg",
-      "animais-4.jpg"
+      "animais-2.jpg",
+      "animais-3.JPG",
+      "animais-4.JPG"
     ]
   }
 };
