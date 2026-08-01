@@ -195,20 +195,20 @@
       </div>
 
       <div class="portfolio-grid">
-        <button class="portfolio-item large" data-image="natureza.jpg" aria-label="Ampliar imagem de fotografia">
-          <img src="natureza.jpg" alt="Trabalho de fotografia" loading="lazy">
-          <span>Fotografia</span>
-        </button>
+        <button class="portfolio-item large" data-gallery="floribella" aria-label="Abrir galeria da Reinauguração Floribella">
+  <img src="floribella-1.jpg" alt="Reinauguração Floribella" loading="lazy">
+  <span>Reinauguração Floribella</span>
+</button>
 
-        <button class="portfolio-item" data-image="empresa.jpg" aria-label="Ampliar imagem de vídeo">
-          <img src="empresa.jpg" alt="Trabalho para empresa" loading="lazy">
-          <span>Conteúdo para marcas</span>
-        </button>
+<button class="portfolio-item" data-gallery="natureza" aria-label="Abrir galeria de natureza">
+  <img src="natureza-1.jpg" alt="Fotografia de natureza" loading="lazy">
+  <span>Natureza</span>
+</button>
 
-        <button class="portfolio-item" data-image="animal.jpg" aria-label="Ampliar imagem de retrato">
-          <img src="animal.jpg" alt="Trabalho de retrato" loading="lazy">
-          <span>Retratos</span>
-        </button>
+<button class="portfolio-item" data-gallery="animais" aria-label="Abrir galeria de animais">
+  <img src="animais-1.jpg" alt="Fotografia de animais" loading="lazy">
+  <span>Animais</span>
+</button>
       </div>
     </section>
 
@@ -271,9 +271,23 @@
   </div>
 
   <div class="image-modal" id="imageModal" aria-hidden="true">
-    <button class="image-close" aria-label="Fechar imagem">&times;</button>
-    <img id="modalImage" src="" alt="Imagem ampliada do portfólio">
-  </div>
+  <button class="image-close" aria-label="Fechar galeria">&times;</button>
+
+  <button class="gallery-nav gallery-prev" aria-label="Foto anterior">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <figure>
+    <img id="modalImage" src="" alt="">
+    <figcaption id="galleryCaption"></figcaption>
+  </figure>
+
+  <button class="gallery-nav gallery-next" aria-label="Próxima foto">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+  <span class="gallery-counter" id="galleryCounter"></span>
+</div>
 
   <a class="whatsapp" href="https://wa.me/5544991080433" target="_blank" aria-label="Falar pelo WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
