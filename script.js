@@ -67,10 +67,10 @@ const galleries = {
   natureza: {
     title: "Natureza",
     images: [
-      "natureza-1.jpg",
-      "natureza-2.jpg",
+      "natureza-1.JPG",
+      "natureza-2.JPG",
       "natureza-3.jpg",
-      "natureza-4.jpg"
+      "natureza-4.JPG"
     ]
   },
 
@@ -79,8 +79,8 @@ const galleries = {
     images: [
       "animais-1.jpg",
       "animais-2.jpg",
-      "animais-3.jpg",
-      "animais-4.jpg"
+      "animais-3.JPG",
+      "animais-4.JPG"
     ]
   }
 };
