@@ -12,6 +12,14 @@ const closeModalButton = document.querySelector(".close");
 const imageModal = document.getElementById("imageModal");
 const modalImage = document.getElementById("modalImage");
 const imageCloseButton = document.querySelector(".image-close");
+const galleryCaption = document.getElementById("galleryCaption");
+const galleryCounter = document.getElementById("galleryCounter");
+const previousButton = document.querySelector(".gallery-prev");
+const nextButton = document.querySelector(".gallery-next");
+
+let activeGallery = null;
+let activeImageIndex = 0;
+let touchStartX = 0;
 
 const services = {
   fotografia: {
@@ -45,6 +53,38 @@ const services = {
   }
 };
 
+const galleries = {
+  floribella: {
+    title: "Reinauguração Floribella",
+    images: [
+      "floribella-1.jpg",
+      "floribella-2.jpg",
+      "floribella-3.jpg",
+      "floribella-4.jpg"
+    ]
+  },
+
+  natureza: {
+    title: "Natureza",
+    images: [
+      "natureza-1.jpg",
+      "natureza-2.jpg",
+      "natureza-3.jpg",
+      "natureza-4.jpg"
+    ]
+  },
+
+  animais: {
+    title: "Animais",
+    images: [
+      "animais-1.jpg",
+      "animais-2.jpg",
+      "animais-3.jpg",
+      "animais-4.jpg"
+    ]
+  }
+};
+
 function revealSections() {
   const visibleArea = window.innerHeight - 100;
 
@@ -75,9 +115,21 @@ function closeServiceModal() {
   document.body.classList.remove("no-scroll");
 }
 
-function openImage(imagePath, altText) {
-  modalImage.src = imagePath;
-  modalImage.alt = altText;
+function updateGallery() {
+  const gallery = galleries[activeGallery];
+
+  modalImage.src = gallery.images[activeImageIndex];
+  modalImage.alt = `${gallery.title} — foto ${activeImageIndex + 1}`;
+  galleryCaption.textContent = gallery.title;
+  galleryCounter.textContent = `${activeImageIndex + 1} / ${gallery.images.length}`;
+}
+
+function openGallery(galleryName) {
+  activeGallery = galleryName;
+  activeImageIndex = 0;
+
+  updateGallery();
+
   imageModal.classList.add("open");
   imageModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("no-scroll");
@@ -87,6 +139,22 @@ function closeImageModal() {
   imageModal.classList.remove("open");
   imageModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("no-scroll");
+}
+
+function showNextImage() {
+  const gallery = galleries[activeGallery];
+
+  activeImageIndex = (activeImageIndex + 1) % gallery.images.length;
+  updateGallery();
+}
+
+function showPreviousImage() {
+  const gallery = galleries[activeGallery];
+
+  activeImageIndex =
+    (activeImageIndex - 1 + gallery.images.length) % gallery.images.length;
+
+  updateGallery();
 }
 
 document.querySelectorAll(".service-card").forEach((card) => {
@@ -101,13 +169,14 @@ document.querySelectorAll(".service-card").forEach((card) => {
 });
 
 document.querySelectorAll(".portfolio-item").forEach((item) => {
-  item.addEventListener("click", () => {
-    openImage(item.dataset.image, item.querySelector("img").alt);
-  });
+  item.addEventListener("click", () => openGallery(item.dataset.gallery));
 });
 
 closeModalButton.addEventListener("click", closeServiceModal);
 imageCloseButton.addEventListener("click", closeImageModal);
+
+previousButton.addEventListener("click", showPreviousImage);
+nextButton.addEventListener("click", showNextImage);
 
 serviceModal.addEventListener("click", (event) => {
   if (event.target === serviceModal) closeServiceModal();
@@ -117,11 +186,27 @@ imageModal.addEventListener("click", (event) => {
   if (event.target === imageModal) closeImageModal();
 });
 
+modalImage.addEventListener("touchstart", (event) => {
+  touchStartX = event.changedTouches[0].screenX;
+}, { passive: true });
+
+modalImage.addEventListener("touchend", (event) => {
+  const touchEndX = event.changedTouches[0].screenX;
+
+  if (touchStartX - touchEndX > 45) showNextImage();
+  if (touchEndX - touchStartX > 45) showPreviousImage();
+}, { passive: true });
+
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeServiceModal();
     closeImageModal();
   }
+
+  if (!imageModal.classList.contains("open")) return;
+
+  if (event.key === "ArrowRight") showNextImage();
+  if (event.key === "ArrowLeft") showPreviousImage();
 });
 
 menuToggle.addEventListener("click", () => {
@@ -152,6 +237,7 @@ window.addEventListener("mousemove", (event) => {
 });
 
 window.addEventListener("scroll", revealSections);
+
 window.addEventListener("load", () => {
   document.body.classList.add("ready");
   revealSections();
