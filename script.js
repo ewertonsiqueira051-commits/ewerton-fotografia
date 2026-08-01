@@ -168,8 +168,38 @@ document.querySelectorAll(".service-card").forEach((card) => {
   });
 });
 
+const preloadedGalleries = new Set();
+
+function preloadGallery(galleryName) {
+  if (preloadedGalleries.has(galleryName)) return;
+
+  preloadedGalleries.add(galleryName);
+
+  galleries[galleryName].images.slice(1).forEach((imageSource) => {
+    const image = new Image();
+    image.src = imageSource;
+  });
+}
+
 document.querySelectorAll(".portfolio-item").forEach((item) => {
-  item.addEventListener("click", () => openGallery(item.dataset.gallery));
+  const galleryName = item.dataset.gallery;
+
+  item.addEventListener("mouseenter", () => {
+    preloadGallery(galleryName);
+  });
+
+  item.addEventListener("focus", () => {
+    preloadGallery(galleryName);
+  });
+
+  item.addEventListener("touchstart", () => {
+    preloadGallery(galleryName);
+  }, { passive: true });
+
+  item.addEventListener("click", () => {
+    preloadGallery(galleryName);
+    openGallery(galleryName);
+  });
 });
 
 closeModalButton.addEventListener("click", closeServiceModal);
