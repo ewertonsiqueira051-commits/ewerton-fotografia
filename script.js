@@ -64,15 +64,15 @@ const galleries = {
     ]
   },
 
-  natureza: {
-    title: "Natureza",
-    images: [
-      "natureza-1.jpg",
-      "natureza-2.jpg",
-      "natureza-3.jpg",
-      "natureza-4.JPG"
-    ]
-  },
+ gestante: {
+  title: "Ensaio Gestante & Família",
+  images: [
+    "ensaio-gestante-1.jpg",
+    "ensaio-gestante-2.jpg",
+    "ensaio-gestante-3.jpg",
+    "ensaio-gestante-4.jpg"
+  ]
+},
 
   animais: {
     title: "Animais",
