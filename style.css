@@ -1039,3 +1039,44 @@ footer p {
     font-size: 1.25rem;
   }
 }
+.sales-cta {
+  padding-top: 105px;
+  padding-bottom: 105px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 94, 255, 0.18), transparent 48%),
+    #08090c;
+}
+
+.sales-cta-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.sales-cta h2 {
+  margin: 18px 0 24px;
+  color: white;
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.sales-cta p {
+  max-width: 540px;
+  margin: 0 auto;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 2;
+}
+
+.btn-sales {
+  margin-top: 32px;
+  background: var(--primary);
+  box-shadow: 0 12px 30px rgba(0, 94, 255, 0.3);
+}
+
+.btn-sales:hover {
+  background: var(--primary-light);
+}
